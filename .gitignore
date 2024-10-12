@@ -1,0 +1,15 @@
+*.DS_Store
+*.pyc
+__pycache__
+
+*.sublime-*
+.venv
+.vscode
+
+build/*
+dist/*
+Emmett.egg-info/*
+uv.lock
+
+tests/**/logs
+tests/**/static
