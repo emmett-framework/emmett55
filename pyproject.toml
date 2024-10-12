@@ -1,0 +1,110 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "emmett55"
+version = "1.0.0"
+description = "The micro web framework for inventors"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.8"
+
+authors = [
+    { name = "Giovanni Barillari", email = "g@baro.dev" }
+]
+
+keywords = ["web", "asyncio"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+    "click>=6.0",
+    "emmett-core[granian,reload]~=1.0.0",
+]
+
+[project.optional-dependencies]
+orjson = ["orjson~=3.10"]
+
+[project.urls]
+Homepage = 'https://github.com/emmett-framework/emmett55'
+Documentation = 'https://emmett.sh/docs'
+Funding = 'https://github.com/sponsors/gi0baro'
+Source = 'https://github.com/emmett-framework/emmett55'
+Issues = 'https://github.com/emmett-framework/emmett55/issues'
+
+[project.scripts]
+emmett55 = "emmett55.cli:main"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    '/README.md',
+    '/LICENSE',
+    '/emmett55',
+    '/tests',
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = 'double'
+
+[tool.ruff.lint]
+extend-select = [
+    # E and F are enabled by default
+    'B',      # flake8-bugbear
+    'C4',     # flake8-comprehensions
+    'C90',    # mccabe
+    'I',      # isort
+    'N',      # pep8-naming
+    'Q',      # flake8-quotes
+    'RUF100', # ruff (unused noqa)
+    'S',      # flake8-bandit
+    'W',      # pycodestyle
+]
+extend-ignore = [
+    'B034', # re.split won't confuse us
+    'N801', # leave to us class naming
+    'N802', # leave to us method naming
+    'N806', # leave to us var naming
+    'N811', # leave to us var naming
+    'N814', # leave to us var naming
+    'N818', # leave to us exceptions naming
+    'S101', # assert is fine
+    'S104', # leave to us security
+    'S110', # pass on exceptions is fine
+]
+mccabe = { max-complexity = 44 }
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+lines-after-imports = 2
+known-first-party = ['emmett55', 'tests']
+
+[tool.ruff.lint.per-file-ignores]
+'emmett55/__init__.py' = ['F401']
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.1",
+    "ruff~=0.5.0",
+]
