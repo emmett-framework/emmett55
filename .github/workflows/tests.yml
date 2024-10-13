@@ -17,15 +17,6 @@ jobs:
       matrix:
         python-version: [3.8, 3.9, '3.10', '3.11', '3.12', '3.13']
 
-    services:
-      postgres:
-        image: postgis/postgis:12-3.2
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test
-        ports:
-        - 5432:5432
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
@@ -38,8 +29,6 @@ jobs:
       run: |
         uv sync --dev
     - name: Test
-      env:
-        POSTGRES_URI: postgres:postgres@localhost:5432/test
       run: |
         uv run pytest -v tests
 
