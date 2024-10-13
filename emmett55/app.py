@@ -50,3 +50,7 @@ class App(_App):
     @property
     def command_group(self):
         return self.cli.group
+
+    def make_shell_context(self, context):
+        context["app"] = self
+        return context
