@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "emmett55"
-version = "1.0.1"
+version = "1.1.0"
 description = "The micro web framework for inventors"
 readme = "README.md"
 license = "BSD-3-Clause"
