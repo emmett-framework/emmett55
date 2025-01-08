@@ -201,6 +201,12 @@ class Emmett55Group(click.Group):
     "--loop", type=click.Choice(["auto", "asyncio", "uvloop"]), default="auto", help="Event loop implementation."
 )
 @click.option(
+    "--task-impl",
+    type=click.Choice(["auto", "asyncio", "rust"]),
+    default="auto",
+    help="Async task implementation to use.",
+)
+@click.option(
     "--ssl-certfile",
     type=click.Path(exists=True, file_okay=True, dir_okay=False, readable=True, path_type=pathlib.Path),
     default=None,
@@ -214,7 +220,7 @@ class Emmett55Group(click.Group):
 )
 @click.option("--reloader/--no-reloader", is_flag=True, default=True, help="Runs with reloader.")
 @pass_script_info
-def develop_command(info, host, port, interface, loop, ssl_certfile, ssl_keyfile, reloader):
+def develop_command(info, host, port, interface, loop, task_impl, ssl_certfile, ssl_keyfile, reloader):
     os.environ["EMMETT55_RUN_ENV"] = "true"
     app_target = info._get_import_name()
 
@@ -239,6 +245,7 @@ def develop_command(info, host, port, interface, loop, ssl_certfile, ssl_keyfile
         host=host,
         port=port,
         loop=loop,
+        task_impl=task_impl,
         log_level="debug",
         log_access=True,
         threading_mode="workers",
@@ -262,7 +269,12 @@ def develop_command(info, host, port, interface, loop, ssl_certfile, ssl_keyfile
 @click.option(
     "--loop", type=click.Choice(["auto", "asyncio", "uvloop"]), default="auto", help="Event loop implementation."
 )
-@click.option("--opt/--no-opt", is_flag=True, default=False, help="Enable loop optimizations.")
+@click.option(
+    "--task-impl",
+    type=click.Choice(["auto", "asyncio", "rust"]),
+    default="auto",
+    help="Async task implementation to use.",
+)
 @click.option("--log-level", type=click.Choice(LOG_LEVELS.keys()), default="info", help="Logging level.")
 @click.option("--access-log/--no-access-log", is_flag=True, default=False, help="Enable access log.")
 @click.option("--backlog", type=int, default=2048, help="Maximum number of connections to hold in backlog")
@@ -291,7 +303,7 @@ def serve_command(
     http,
     ws,
     loop,
-    opt,
+    task_impl,
     log_level,
     access_log,
     backlog,
@@ -306,7 +318,7 @@ def serve_command(
         host=host,
         port=port,
         loop=loop,
-        loop_opt=opt,
+        task_impl=task_impl,
         log_level=log_level,
         log_access=access_log,
         workers=workers,
