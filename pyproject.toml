@@ -34,11 +34,13 @@ classifiers = [
 
 dependencies = [
     "click>=6.0",
-    "emmett-core[granian,reload]~=1.1.0",
+    "emmett-core[granian,reload]~=1.2.0",
 ]
 
 [project.optional-dependencies]
-orjson = ["orjson~=3.10"]
+orjson = ['orjson~=3.10']
+rloop = ['rloop~=0.1; sys_platform != "win32"']
+uvloop = ['uvloop>=0.18.0; sys_platform != "win32" and platform_python_implementation == "CPython"']
 
 [project.urls]
 Homepage = 'https://github.com/emmett-framework/emmett55'
