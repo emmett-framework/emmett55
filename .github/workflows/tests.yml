@@ -20,7 +20,7 @@ jobs:
     env:
       UV_PYTHON: ${{ matrix.python-version }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install uv
       uses: astral-sh/setup-uv@v5
     - name: Install dependencies
@@ -40,7 +40,7 @@ jobs:
     env:
       UV_PYTHON: ${{ matrix.python-version }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install uv
       uses: astral-sh/setup-uv@v5
     - name: Install dependencies
@@ -60,7 +60,7 @@ jobs:
     env:
       UV_PYTHON: ${{ matrix.python-version }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install uv
       uses: astral-sh/setup-uv@v5
     - name: Install dependencies
