@@ -4,9 +4,6 @@ on:
   release:
     types: [published]
 
-env:
-  UV_PYTHON: 3.13
-
 jobs:
   publish:
     runs-on: ubuntu-latest
